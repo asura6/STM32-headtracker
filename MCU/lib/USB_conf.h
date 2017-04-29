@@ -70,7 +70,7 @@ static const USB_combined_descriptor_t USB_combined_descriptor = {
         .bCountryCode       = 0x00U,
         .bNumDescriptors    = 0x01U,
         .bDescriptorType_class  = 0x22U,
-        .wDescriptorLength0 = 56U,      .wDescriptorLength1  = 0x00U
+        .wDescriptorLength0 = 60U,      .wDescriptorLength1  = 0x00U
     },
     .endp_desc = {
         .bLength            = 7U,
@@ -86,48 +86,52 @@ static const USB_combined_descriptor_t USB_combined_descriptor = {
 /*********   HID REPORT AND DESCRIPTOR   *********/
 /*************************************************/
 
-// JOYSTICK WITH SIX AXIS
 static const uint8_t HID_report_desc[] = {
-    0x05, 0x01,  //USAGE_PAGE (Generic Desktop)
-    0x09, 0x04,  //USAGE (Joystick)
-    0xa1, 0x01, /* Collection (Application) */
-    0x09, 0x01, /* Usage (Pointer) */ 
-    0xa1, 0x00,  //    COLLECTION (Physical)
-    0x05, 0x01,  //USAGE_PAGE (Generic Desktop) 
-    0x09, 0x30,  //        USAGE (X)
-    0x09, 0x33,  //        USAGE (Rx)
-    0x09, 0x31,  //        USAGE (Y)
-    0x09, 0x34,  //        USAGE (Ry)
-    0x09, 0x32,  //        USAGE (Z)
-    0x09, 0x35,  //        USAGE (Rz) 
-    0x16, 0x00, 0x80, //Logical minimum -32768
-    0x26, 0xff, 0x7f, //Logical Maximum 32767
-    0x75, 0x10,      //Report size 16
-    0x95, 0x06,      //Report count 6 
-    0x81, 0x82,  //        INPUT (Data,Var,Abs,Vol)
-    0xc0,  //    END COLLECTION
-    0x05, 0x09,  //        USAGE_PAGE (Button)
-    0x19, 0x01,  //        USAGE_MINIMUM (Button 1)
-    0x29, 0x10,  //        USAGE_MAXIMUM (Button 16)
-    0x15, 0x00,  //        LOGICAL_MINIMUM (0)
-    0x25, 0x01,  //        LOGICAL_MAXIMUM (1)
-    0x95, 0x10,  //        REPORT_COUNT (16)
-    0x75, 0x01,  //        REPORT_SIZE (1)
-    0x81, 0x02,  //        INPUT (Data,Var,Abs) 
-    0xc0   //END COLLECTION
-};
+        0x05, 0x01,                     // Usage Page (Generic Desktop)
+        0x09, 0x04,                     // Usage (Joystick)
+        0xA1, 0x01,                     // Collection (Application)
+        0x15, 0x00,                     // Logical Minimum (0)
+        0x25, 0x01,                     // Logical Maximum (1)
+        0x75, 0x01,                     // Report Size (1)
+        0x95, 0x10,                     // Report Count (16)
+        0x05, 0x09,                     // Usage Page (Button)
+        0x19, 0x01,                     // Usage Minimum (Button #1)
+        0x29, 0x10,                     // Usage Maximum (Button #16)
+        0x81, 0x02,                     // Input (variable,absolute)
+        0x05, 0x01,                     // Usage Page (Generic Desktop)
+        0x09, 0x01,                     // Usage (Pointer)
+        0xA1, 0x00,                     // Collection ()
+	0x16, 0x00, 0x80,               //   Logical Minimum (-32768)
+	0x26, 0xFF, 0x7F,               //   Logical Maximum (32767)
+        0x75, 0x10,                     //   Report Size (16)
+        0x95, 0x06,                     //   Report Count (6)
+        0x19, 0x30,                     //   Usage Minimum (X axis)
+        0x29, 0x35,                     //   Usage Maximum (Rz axis)
+        0x81, 0x02,                     //   Input (variable,absolute)
+        0xC0,                           // End Collection
+        0x16, 0x00, 0x80,               // Logical Minimum (-32768)
+	0x26, 0xFF, 0x7F,               // Logical Maximum (32768)
+        0x75, 0x10,                     // Report Size (16)
+        0x95, 0x03,                     // Report Count (3)
+        0x09, 0x36,                     // Usage (Slider)
+        0x81, 0x02,                     // Input (variable,absolute)
+        0xC0                            // End Collection
+}; 
 
 typedef struct { 
+    uint16_t buttons;
     int16_t t_x; //Translate x
     int16_t t_y; //Translate y
     int16_t t_z; //Translate z
     int16_t r_x; //Rotate x (Roll)
     int16_t r_y; //Rotate y (Pitch)
     int16_t r_z; //Rotate z (Yaw)
-    uint16_t buttons;
+    int16_t m_x; //Mag x
+    int16_t m_y; //Mag y
+    int16_t m_z; //Mag z 
 } HID_report_t;
 
-#define HID_REPORT_SIZE 14U 
+#define HID_REPORT_SIZE 20U 
 
 /******************************************/
 /*********   STRING DESCRIPTORS   *********/

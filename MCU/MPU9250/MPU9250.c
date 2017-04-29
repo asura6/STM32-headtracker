@@ -14,7 +14,7 @@
 #define ACCEL_SENS 16384UL 
 #define ACCEL_RES 0.000061035f //G per LSB - 4g/2^16
 #define GYRO_RES 0.01526f //deg/s per LSB - 1000dps/2**16
-#define MAG_RES 1.001499f //G per LSB - (2*4912uT)/2**16 = 1.499 mGefine SUCCESS          0 
+#define MAG_RES 1.499f //mG per LSB - (2*4912uT)/2**16 = 1.499 mGefine SUCCESS          0 
 #define PI 3.14159265358f
 
 
@@ -107,11 +107,12 @@ void AK8963_Poll_Axis() {
             I2C_Wait_Until_Done();
             /* Load the values into the global axes struct */
             /* The order is switched to align with MPU6050 */
-            MPU9250_axes.y.mag = buffer[0] | (buffer[1] << 8);
-            MPU9250_axes.x.mag = buffer[2] | (buffer[3] << 8); 
+            MPU9250_axes.y.mag = (buffer[0] | (buffer[1] << 8));
+            MPU9250_axes.x.mag = (buffer[2] | (buffer[3] << 8)); 
             MPU9250_axes.z.mag = -(buffer[4] | (buffer[5] << 8));
             /* If single measurement mode then start another one */
             MPU9250_Write_Byte(AK8963_ADDR, AK8963_CNTL_1, 0x11U); 
+
         }
     } else { 
         /* This indicates that the 6-DOF sensor fusion should be used */

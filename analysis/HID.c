@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdint.h> 
 
-int16_t buf[7]; 
+int16_t buf[10]; 
 
 int Connect(const char device[]) {
     int fd, res; 
@@ -23,6 +23,6 @@ void Disconnect(int fd) {
 }
 
 int16_t *Read(int fd) { 
-    read(fd, buf, 14);
+    read(fd, buf, 20);
     return buf;
 } 

@@ -64,19 +64,21 @@ int main(void) {
         //HID_report.t_x = (int16_t)(angles[0]); 
         //HID_report.t_y = (int16_t)(angles[1]); 
         //HID_report.t_z = (int16_t)(angles[2]); 
-
         HID_report.t_x = MPU9250_axes.x.gyro; 
         HID_report.t_y = MPU9250_axes.y.gyro; 
         HID_report.t_z = MPU9250_axes.z.gyro; 
         HID_report.r_x = MPU9250_axes.x.accel; 
         HID_report.r_y = MPU9250_axes.y.accel; 
         HID_report.r_z = MPU9250_axes.z.accel; 
+        HID_report.m_x = MPU9250_axes.x.mag; 
+        HID_report.m_y = MPU9250_axes.y.mag; 
+        HID_report.m_z = MPU9250_axes.z.mag; 
         HID_report.buttons = 0x00U;
 
         /* Update the HID report and transmit */
         USB_Update_HID_Report(); 
         /* Delay 50 ms and toggle the on-board LED */
-        TIM2_Delay_ms(100U);
+        TIM2_Delay_ms(10U);
         LED_Toggle(GPIOC_BASE, 13);
     }
 }
