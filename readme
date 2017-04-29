@@ -1,0 +1,11 @@
+This project is a 9 degrees of freedom headtracker made using a STM32
+microcontroller, a MPU-9250 mems-device and the open source Madgwick
+sensor-fusion algorithm.
+
+The project is not complete as of yet.
+
+The MCU directory contain microcontroller relevant-code. The analysis directory
+contain a directory which include analysis software which plots the sensor
+output by intercepting raw HID-communication data through the USB protocol.
+
+This project is build using gcc and makefiles.
