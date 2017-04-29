@@ -1,0 +1,3 @@
+Build requires gcc, swig and python 3.
+
+Running the software require matplotlib and numpy
