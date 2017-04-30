@@ -7,7 +7,7 @@
 #include "../lib/timer.h" 
 #include "../Madgwick/MadgwickAHRS.h"
 
-#include "/usr/arm-none-eabi/include/math.h"
+//#include "/usr/arm-none-eabi/include/math.h"
 
 
 #define GYRO_SENS 131UL
@@ -17,6 +17,11 @@
 #define MAG_RES 1.499f //mG per LSB - (2*4912uT)/2**16 = 1.499 mGefine SUCCESS          0 
 #define PI 3.14159265358f
 
+/* LOCAL MAGNETIC FIELD CONSTANTS */
+#define MAG_DECLINATION 5.9157f //deg
+#define MAG_INCLINATION 72.9600f //deg
+// Calculate these for your location at
+// https://www.ngdc.noaa.gov/geomag-web/#igrfwmm 
 
 typedef struct {
     float gyro[3];

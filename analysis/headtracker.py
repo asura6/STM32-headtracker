@@ -65,14 +65,14 @@ colors = plt.cm.Set1(np.linspace(0.0, 1.0, 9))
 # Initialize legend
 labels = ['x-axis', 'y-axis', 'z-axis'] 
 for i in np.arange(0,9):
-    ax[i//3].plot([],[],color=colors[i,:], label=labels[i % 3], lw=3)
+    ax[i//3].plot([],[],color=colors[i % 3,:], label=labels[i % 3], lw=3)
 ax[0].legend(loc='upper right')
 ax[1].legend(loc='upper right') 
 ax[2].legend(loc='upper right') 
 
 lines = []
 for i in np.arange(0,9):
-    lobj, = ax[i // 3].plot(np.nan,np.nan, lw=3, color=colors[i,:])
+    lobj, = ax[i // 3].plot(np.nan,np.nan, lw=3, color=colors[i % 3,:])
     lines.append(lobj) 
 
 # initialization function: plot the background of each frame
@@ -124,11 +124,11 @@ def animate(i):
     for i in np.arange(0,9):
         lines[i].set_data(x, y[i,:]) 
 
-    return tuple(lines)
-
+    return tuple(lines) 
 
 # call the animator.  blit=True means only re-draw the parts that have changed.
 anim = animation.FuncAnimation(fig, animate, init_func=init,
-        frames=10**100, interval=0.00001, blit=True)
+        frames=10**100, interval=0.000000001, blit=True) 
 
 plt.show() 
+
