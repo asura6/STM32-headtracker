@@ -1,0 +1,11 @@
+#!/bin/bash 
+for d in /sys/class/hidraw/* ; do 
+    dev=$(cat $d/device/uevent | grep HID_NAME) 
+    res=$(echo $dev | grep RainFoo)
+    if [[ $res != '' ]]
+      then
+        hid=$(echo $d | grep -o 'hidraw[0-9]')
+        echo $hid
+    fi
+done
+
