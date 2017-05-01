@@ -32,3 +32,18 @@ void LED_Toggle(uint32_t port, uint32_t pin) {
         (*BSRR) = (1U << pin); //Set pin HIGH
     }
 }
+
+void Init_PB0_Interrupt(void) {
+    /* Configure interrupt pin */
+    /* Enable clock to port B */ 
+    RCC->APB2ENR |= RCC_APB2ENR_IOPBEN; 
+    RCC->APB2ENR |= RCC_APB2ENR_AFIOEN;
+    AFIO->EXTICR[0] |= 0x01; 
+    /* Interrupt mask register remove masking on line X */ 
+    EXTI->IMR |= 0x01; 
+    /* Falling (why does this work?) trigger enabled for line X */ 
+    EXTI->FTSR |= 0x01; 
+    /* Enable NVIC interrupt */ 
+    NVIC_EnableIRQ(EXTI0_IRQn);
+}
+

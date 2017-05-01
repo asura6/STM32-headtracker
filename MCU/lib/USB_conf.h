@@ -112,7 +112,7 @@ static const uint8_t HID_report_desc[] = {
         0x16, 0x00, 0x80,               // Logical Minimum (-32768)
 	0x26, 0xFF, 0x7F,               // Logical Maximum (32768)
         0x75, 0x10,                     // Report Size (16)
-        0x95, 0x03,                     // Report Count (3)
+        0x95, 0x06,                     // Report Count (6)
         0x09, 0x36,                     // Usage (Slider)
         0x81, 0x02,                     // Input (variable,absolute)
         0xC0                            // End Collection
@@ -129,9 +129,13 @@ typedef struct {
     int16_t m_x; //Mag x
     int16_t m_y; //Mag y
     int16_t m_z; //Mag z 
+    int16_t yaw;
+    int16_t pitch;
+    int16_t roll;
+
 } HID_report_t;
 
-#define HID_REPORT_SIZE 20U 
+#define HID_REPORT_SIZE 26U 
 
 /******************************************/
 /*********   STRING DESCRIPTORS   *********/

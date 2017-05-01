@@ -24,7 +24,9 @@ void Init_AK8963(void);
 void MPU6050_Poll_Axis();
 void AK8963_Poll_Axis();
 void MPU6050_Calibration(void); 
-void MPU9250_Fusion(void);
+void MPU9250_Fusion(float sample_frequency);
+void MPU9250_Zero_Mag(void);
+
 
 
 #endif
