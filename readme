@@ -8,4 +8,5 @@ output by intercepting raw HID-communication data through the USB protocol.
 
 This project is build using gcc and makefiles.
 
-More details will follow.
+More details are available on my website:
+https://risaksson.com/2020/10/11/embedded-development-usb-inertial-headtracker/
